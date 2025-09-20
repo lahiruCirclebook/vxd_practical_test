@@ -2,15 +2,16 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\FormController;
+use App\Http\Controllers\Api\SubmissionController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
-// Form Builder API routes
-Route::prefix('forms')->group(function () {
-    // Add your form builder routes here
-    Route::get('/', function () {
-        return response()->json(['message' => 'Form Builder API is working!']);
-    });
+Route::middleware('api')->group(function () {
+    // Form management routes
+    Route::apiResource('forms', FormController::class);
+
+    // Form submission routes
+    Route::post('forms/{form}/submit', [SubmissionController::class, 'store']);
+    Route::get('forms/{form}/submissions', [SubmissionController::class, 'index']);
+    Route::get('forms/{form}/submissions/{submission}', [SubmissionController::class, 'show']);
 });
