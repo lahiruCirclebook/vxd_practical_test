@@ -2,42 +2,90 @@ import api from './api'
 
 export const formService = {
   // Get all forms
-  getForms() {
-    return api.get('/forms')
+  async getForms() {
+    try {
+      const data = await api.get('/forms')
+      return data || []
+    } catch (error) {
+      console.error('Error fetching forms:', error)
+      throw error
+    }
   },
 
   // Get single form with fields
-  getForm(id) {
-    return api.get(`/forms/${id}`)
+  async getForm(id) {
+    try {
+      const data = await api.get(`/forms/${id}`)
+      return data
+    } catch (error) {
+      console.error('Error fetching form:', error)
+      throw error
+    }
   },
 
   // Create new form
-  createForm(formData) {
-    return api.post('/forms', formData)
+  async createForm(formData) {
+    try {
+      const data = await api.post('/forms', formData)
+      return data
+    } catch (error) {
+      console.error('Error creating form:', error)
+      throw error
+    }
   },
 
   // Update existing form
-  updateForm(id, formData) {
-    return api.put(`/forms/${id}`, formData)
+  async updateForm(id, formData) {
+    try {
+      const data = await api.put(`/forms/${id}`, formData)
+      return data
+    } catch (error) {
+      console.error('Error updating form:', error)
+      throw error
+    }
   },
 
   // Delete form
-  deleteForm(id) {
-    return api.delete(`/forms/${id}`)
+  async deleteForm(id) {
+    try {
+      const data = await api.delete(`/forms/${id}`)
+      return data
+    } catch (error) {
+      console.error('Error deleting form:', error)
+      throw error
+    }
   },
 
   // Submit form response
-  submitForm(formId, formData) {
-    return api.post(`/forms/${formId}/submit`, formData)
+  async submitForm(formId, formData) {
+    try {
+      const data = await api.post(`/forms/${formId}/submit`, formData)
+      return data
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      throw error
+    }
   },
 
   // Get form submissions
-  getSubmissions(formId) {
-    return api.get(`/forms/${formId}/submissions`)
+  async getSubmissions(formId) {
+    try {
+      const data = await api.get(`/forms/${formId}/submissions`)
+      return data || []
+    } catch (error) {
+      console.error('Error fetching submissions:', error)
+      throw error
+    }
   },
 
   // Get single submission
-  getSubmission(formId, submissionId) {
-    return api.get(`/forms/${formId}/submissions/${submissionId}`)
+  async getSubmission(formId, submissionId) {
+    try {
+      const data = await api.get(`/forms/${formId}/submissions/${submissionId}`)
+      return data
+    } catch (error) {
+      console.error('Error fetching submission:', error)
+      throw error
+    }
   },
 }
